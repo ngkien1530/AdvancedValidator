@@ -30,10 +30,10 @@ namespace AdvancedValidator.Internal {
 	/// </summary>
 	/// <typeparam name="T">Type of object being validated</typeparam>
 	/// <typeparam name="TProperty">Type of property being validated</typeparam>
-	public class RuleBuilder<T, TProperty> : IRuleBuilderOptions<T, TProperty>, IValidationRule<T>, IRuleBuilderInitial<T, TProperty> {
+	public class RuleBuilder<T, TProperty> : IRuleBuilderOptions<T, TProperty>, IPropertyRule<T>, IRuleBuilderInitial<T, TProperty> {
 		PropertyRule<T, TProperty> currentRule;
 		readonly PropertyModel<T, TProperty> model;
-		readonly List<IValidationRule<T>> rules = new List<IValidationRule<T>>();
+		readonly List<IPropertyRule<T>> rules = new List<IPropertyRule<T>>();
 		//Func<CascadeMode> cascadeMode = () => ValidatorOptions.CascadeMode;
 
 		//public CascadeMode CascadeMode {
@@ -89,18 +89,16 @@ namespace AdvancedValidator.Internal {
 		//	return GetEnumerator();
 		//}
 
-		public virtual IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
+	    public IPropertyValidator Validator { get; set; }
+
+	    public virtual IEnumerable<ValidationFailure> Validate(T instance) {
 			//var cascade = cascadeMode();
 			bool hasAnyFailure = false;
 
 			foreach(var rule in rules) {
-				var results = rule.Validate(context);
-
-				bool hasFailure = false;
+				var results = rule.Validate(instance);
 
 				foreach(var result in results) {
-					hasAnyFailure=true;
-					hasFailure = true;
 					yield return result;
 				}
 
@@ -109,9 +107,9 @@ namespace AdvancedValidator.Internal {
 				//}
 			}
 
-			if (hasAnyFailure) {
-				model.OnFailure(context.InstanceToValidate);
-			}
+			//if (hasAnyFailure) {
+			//	model.OnFailure(context.InstanceToValidate);
+			//}
 		}
 
 		public IRuleBuilderInitial<T, TProperty> Configure(Action<RuleBuilder<T, TProperty>> configurator) {

@@ -36,18 +36,17 @@ namespace AdvancedValidator.Internal {
 			this.model = propertyModel;
 			Validator = validator;
 		}
+        
 
-		public IPropertyValidator Validator { get; set; }
+		//public Action<T> OnFailure {
+		//	get { return model.OnFailure; }
+		//	set { model.OnFailure=value; }
+		//}
 
-		public Action<T> OnFailure {
-			get { return model.OnFailure; }
-			set { model.OnFailure=value; }
-		}
-
-		public string CustomPropertyName {
-			get { return model.CustomPropertyName; }
-			set { model.CustomPropertyName = value; }
-		}
+		//public string CustomPropertyName {
+		//	get { return model.CustomPropertyName; }
+		//	set { model.CustomPropertyName = value; }
+		//}
 
 		public string PropertyName {
 			get { return model.PropertyName; }
@@ -58,27 +57,22 @@ namespace AdvancedValidator.Internal {
 			get { return model.Member; }
 		}
 
-		/// <summary>
+	    public IPropertyValidator Validator { get; set; }
+
+	    /// <summary>
 		/// Executes the validator associated with this rule.
 		/// </summary>
 		/// <param name="instance">The object to validate</param>
 		/// <returns>Will return a <see cref="ValidationFailure">ValidationFailure</see> if validation fails, otherwise null.</returns>
-		public IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
-			//Property Name cannot be determined for non-MemberExpressions. 
-			if (model.PropertyName == null && model.CustomPropertyName == null) {
-				throw new InvalidOperationException(string.Format("Property name could not be automatically determined for expression {0}. Please specify either a custom property name by calling 'WithName'.", model.Expression));
-			}
+		public IEnumerable<ValidationFailure> Validate(T instance) {
 
-			string propertyName = BuildPropertyName(context);
-
-		    var validationContext = new PropertyValidatorContext(model.PropertyDescription, context.InstanceToValidate, x => model.PropertyFunc((T)x), propertyName, Member);
-		    validationContext.PropertyChain = context.PropertyChain;
-		    return Validator.Validate(validationContext);
-		    
+		    var validationContext = new PropertyValidatorContext(instance, x => model.PropertyFunc((T)x), model.PropertyName, Member);
+		    //validationContext.PropertyChain = context.PropertyChain;
+		    return Validator.Validate(validationContext);		    
 		}
 
-		private string BuildPropertyName(ValidationContext<T> context) {
-			return context.PropertyChain.BuildPropertyName(model.PropertyName ?? model.CustomPropertyName);
-		}
+		//private string BuildPropertyName(ValidationContext<T> context) {
+		//	return context.PropertyChain.BuildPropertyName(model.PropertyName);
+		//}
 	}
 }

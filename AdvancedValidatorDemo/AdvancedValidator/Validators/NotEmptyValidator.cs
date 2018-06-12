@@ -21,24 +21,17 @@
 namespace AdvancedValidator.Validators {
 	using Attributes;
 
-	public class NotEmptyValidator : PropertyValidator, INotEmptyValidator {
-		readonly object defaultValueForType;
-
-		public NotEmptyValidator(object defaultValueForType) : base("Not Empty") {
-			this.defaultValueForType = defaultValueForType;
-			//SupportsStandaloneValidation = true;
+	public class NotEmptyValidator : PropertyValidator
+	{
+		public NotEmptyValidator() : base("Not Empty") {
 		}
 
 		protected override bool IsValid(PropertyValidatorContext context) {
-			if (context.PropertyValue == null || context.PropertyValue.Equals(string.Empty) ||
-				Equals(context.PropertyValue, defaultValueForType)) {
+			if (context.PropertyValue == null || context.PropertyValue.Equals(string.Empty)) {
 				return false;
 			}
 
 			return true;
 		}
-	}
-
-	public interface INotEmptyValidator : IPropertyValidator {
 	}
 }

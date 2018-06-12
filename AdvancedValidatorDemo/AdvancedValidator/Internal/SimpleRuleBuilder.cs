@@ -16,6 +16,8 @@
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
 #endregion
 
+using AdvancedValidator.Validators;
+
 namespace AdvancedValidator.Internal {
 	using System;
 	using System.Collections;
@@ -25,7 +27,7 @@ namespace AdvancedValidator.Internal {
 	/// <summary>
 	/// A simple implementation of IRuleBuilder that just holds a single validation rule.
 	/// </summary>
-	public class SimpleRuleBuilder<T> : IValidationRule<T>
+	public class SimpleRuleBuilder<T> : IPropertyRule<T>
 	{
         readonly IValidationRule<T> rule;
 
@@ -41,7 +43,9 @@ namespace AdvancedValidator.Internal {
 		//	return GetEnumerator();
 		//}
 
-		public IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
+	    public IPropertyValidator Validator { get; set; }
+
+	    public IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
 			return rule.Validate(context);
 		}
 	}

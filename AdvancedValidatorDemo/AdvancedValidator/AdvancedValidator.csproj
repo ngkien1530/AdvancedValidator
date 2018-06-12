@@ -42,18 +42,15 @@
   <ItemGroup>
     <Compile Include="AbstractValidator.cs" />
     <Compile Include="Attributes\ValidatorAttribute.cs" />
-    <Compile Include="CascadeMode.cs" />
     <Compile Include="DefaultValidatorExtensions.cs" />
     <Compile Include="DefaultValidatorOptions.cs" />
     <Compile Include="Internal\Extensions.cs" />
     <Compile Include="Internal\IConfigurable.cs" />
     <Compile Include="Internal\IPropertyRule.cs" />
-    <Compile Include="Internal\PropertyChain.cs" />
     <Compile Include="Internal\PropertyModel.cs" />
     <Compile Include="Internal\PropertyRule.cs" />
     <Compile Include="Internal\PropertySelector.cs" />
     <Compile Include="Internal\RuleBuilder.cs" />
-    <Compile Include="Internal\SimpleRuleBuilder.cs" />
     <Compile Include="IValidationRule.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="IValidatorFactory.cs" />
@@ -61,7 +58,6 @@
     <Compile Include="Results\ValidationFailure.cs" />
     <Compile Include="Results\ValidationResult.cs" />
     <Compile Include="Syntax.cs" />
-    <Compile Include="ValidationContext.cs" />
     <Compile Include="ValidatorFactoryBase.cs" />
     <Compile Include="ValidatorOptions.cs" />
     <Compile Include="Validators\IPropertyValidator.cs" />

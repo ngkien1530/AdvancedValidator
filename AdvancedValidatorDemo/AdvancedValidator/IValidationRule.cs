@@ -32,6 +32,6 @@ namespace AdvancedValidator {
 		/// <param name="instance">The instance to validate</param>
 		/// <param name="context">Validation Context</param>
 		/// <returns>A collection of validation failures</returns>
-		IEnumerable<ValidationFailure> Validate(ValidationContext<T> context);
+		IEnumerable<ValidationFailure> Validate(T context);
 	}
 }

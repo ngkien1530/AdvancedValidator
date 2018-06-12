@@ -33,7 +33,7 @@ namespace AdvancedValidator {
 		/// </summary>
 		/// <param name="context">A ValidationContext</param>
 		/// <returns>A ValidationResult object containing any validation failures.</returns>
-		ValidationResult Validate(ValidationContext<T> context);
+		//ValidationResult Validate(ValidationContext<T> context);
 	}
 
 	public interface IValidator {
@@ -50,7 +50,7 @@ namespace AdvancedValidator {
 		/// </summary>
 		/// <param name="context">A ValidationContext</param>
 		/// <returns>A ValidationResult object containy any validation failures.</returns>
-		ValidationResult Validate(ValidationContext context);
+		//ValidationResult Validate(ValidationContext context);
 
 		/// <summary>
 		/// Creates a hook to access various meta data properties

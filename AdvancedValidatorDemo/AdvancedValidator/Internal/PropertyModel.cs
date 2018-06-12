@@ -9,14 +9,14 @@ namespace AdvancedValidator.Internal {
 		public MemberInfo Member { get; private set; }
 		public Func<T, TProperty> PropertyFunc { get; private set; }
 		public Expression Expression { get; private set; }
-		public string CustomPropertyName { get; set; }
-		public Action<T> OnFailure { get; set; }
+		//public string CustomPropertyName { get; set; }
+		//public Action<T> OnFailure { get; set; }
 
 		public PropertyModel(MemberInfo member, Func<T, TProperty> propertyFunc, Expression expression) {
 			Member = member;
 			PropertyFunc = propertyFunc;
 			Expression = expression;
-			OnFailure = x => { };
+			//OnFailure = x => { };
 
 			PropertyName = ValidatorOptions.PropertyNameResolver(typeof(T), member);
 		}
@@ -27,9 +27,9 @@ namespace AdvancedValidator.Internal {
 		/// </summary>
 		public string PropertyName { get; set; }
 
-		public string PropertyDescription {
-			get { return CustomPropertyName ?? PropertyName.SplitPascalCase(); }
-		}
+		//public string PropertyDescription {
+		//	get { return CustomPropertyName ?? PropertyName.SplitPascalCase(); }
+		//}
 
 	}
 }

@@ -31,7 +31,6 @@ namespace AdvancedValidator.Validators {
 		private object propertyValue;
 
 		public MemberInfo Member { get; private set; }
-		public string PropertyDescription { get; protected set; }
 		public object Instance { get; private set; }
 		public string PropertyName { get; private set; }
 
@@ -40,7 +39,7 @@ namespace AdvancedValidator.Validators {
 		//}
 
 		//TODO: Should this be exposed? If so, should it be public?
-		internal PropertyChain PropertyChain { get; set; }
+		//internal PropertyChain PropertyChain { get; set; }
 		internal PropertySelector PropertyValueFunc { get { return propertyValueFunc; } }
 
 		//Lazily load the property value
@@ -60,22 +59,20 @@ namespace AdvancedValidator.Validators {
 			}
 		}
 
-		public PropertyValidatorContext(string propertyDescription, object instance, object propertyValue, string propertyName) {
-			PropertyDescription = propertyDescription;
+		public PropertyValidatorContext(object instance, object propertyValue, string propertyName) {
 			Instance = instance;
 			//messageFormatter = new MessageFormatter();
 			PropertyValue = propertyValue;
 			PropertyName = propertyName;
 		}
 
-		public PropertyValidatorContext(string propertyDescription, object instance, PropertySelector propertyValueFunc)
-		: this(propertyDescription, instance, propertyValueFunc, null, null){
+		public PropertyValidatorContext(object instance, PropertySelector propertyValueFunc)
+		: this(instance, propertyValueFunc, null, null){
 
 		}
 
-		public PropertyValidatorContext(string propertyDescription, object instance, PropertySelector propertyValueFunc, string propertyName, MemberInfo member) {
+		public PropertyValidatorContext(object instance, PropertySelector propertyValueFunc, string propertyName, MemberInfo member) {
 			propertyValueFunc.Guard("propertyValueFunc cannot be null");
-			PropertyDescription = propertyDescription;
 			Instance = instance;
 			//messageFormatter = new MessageFormatter();
 			this.PropertyName = propertyName;

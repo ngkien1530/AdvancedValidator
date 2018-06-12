@@ -29,10 +29,10 @@ namespace AdvancedValidator {
 	/// Extension methods that provide the default set of validators.
 	/// </summary>
 	public static class DefaultValidatorExtensions {
-		public static IRuleBuilderOptions<T, TProperty> NotEmpty<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
-		{
-			return ruleBuilder.SetValidator(new NotEmptyValidator(default(TProperty)));
-		}
+		//public static IRuleBuilderOptions<T, TProperty> NotEmpty<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
+		//{
+		//	return ruleBuilder.SetValidator(new NotEmptyValidator(default(TProperty)));
+		//}
 
 	//	/// <summary>
 	//	/// Specifies that a particular validator should be used to validate a collection of nested classes. 

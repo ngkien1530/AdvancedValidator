@@ -20,20 +20,20 @@ namespace AdvancedValidator {
 	using Internal;
 
 	public class ValidationContext<T> {
-		public ValidationContext(T instanceToValidate, PropertyChain propertyChain/*, IValidatorSelector validatorSelector*/) {
-			PropertyChain = new PropertyChain(propertyChain);
+		public ValidationContext(T instanceToValidate/*, PropertyChain propertyChain*//*, IValidatorSelector validatorSelector*/) {
+			//PropertyChain = new PropertyChain(propertyChain);
 			InstanceToValidate = instanceToValidate;
 			//Selector = validatorSelector;
 		}
 
-		public PropertyChain PropertyChain { get; private set; }
+		//public PropertyChain PropertyChain { get; private set; }
 		public T InstanceToValidate { get; private set; }
 		//public IValidatorSelector Selector { get; private set; }
 	}
 
 	public class ValidationContext : ValidationContext<object> {
-		public ValidationContext(object instanceToValidate, PropertyChain propertyChain/*, IValidatorSelector validatorSelector*/) 
-			: base(instanceToValidate, propertyChain/*, validatorSelector*/) {
+		public ValidationContext(object instanceToValidate/*, PropertyChain propertyChain*//*, IValidatorSelector validatorSelector*/) 
+			: base(instanceToValidate/*, propertyChain*//*, validatorSelector*/) {
 		}
 	}
 }

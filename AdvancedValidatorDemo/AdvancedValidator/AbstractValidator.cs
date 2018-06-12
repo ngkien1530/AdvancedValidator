@@ -32,42 +32,42 @@ namespace AdvancedValidator {
 	/// <typeparam name="T">The type of the object being validated</typeparam>
 	public abstract class AbstractValidator<T> : IValidator<T>//, IEnumerable<IValidationRule<T>>
 	{
-		readonly List<IValidationRule<T>> nestedValidators = new List<IValidationRule<T>>();
+		private readonly List<IPropertyRule<T>> _rules = new List<IPropertyRule<T>>();
 
 		ValidationResult IValidator.Validate(object instance) {
 			return Validate((T)instance);
 		}
 
-		ValidationResult IValidator.Validate(ValidationContext context) {
-			var genericContext = new ValidationContext<T>((T)context.InstanceToValidate, context.PropertyChain);
+		//ValidationResult IValidator.Validate(ValidationContext context) {
+		//	var genericContext = new ValidationContext<T>((T)context.InstanceToValidate);
 
-			return Validate(genericContext);
-		}
+		//	return Validate(genericContext);
+		//}
 
-		public virtual ValidationResult Validate(T instance) {
-			return Validate(new ValidationContext<T>(instance, new PropertyChain()));
-		}
+		//public virtual ValidationResult Validate(T instance) {
+		//	return Validate(new ValidationContext<T>(instance));
+		//}
 		
 
-		public virtual ValidationResult Validate(ValidationContext<T> context)
+		public virtual ValidationResult Validate(T instance)
 		{
-		    context.Guard("Cannot pass null to Validate");
+		    instance.Guard("Cannot pass null to Validate");
 		    var failures = new List<ValidationFailure>();
-		    foreach (var validator in nestedValidators)
+		    foreach (var validator in _rules)
 		    {
-		        failures.AddRange(validator.Validate(context));
+		        failures.AddRange(validator.Validate(instance));
 		    }
 			return new ValidationResult(failures);
 		}
 
-		public void AddRule(IValidationRule<T> rule) {
-			nestedValidators.Add(new SimpleRuleBuilder<T>(rule));
+		public void AddRule(IPropertyRule<T> rule) {
+			_rules.Add(rule);
 		}
 
 		public IRuleBuilderInitial<T, TProperty> RuleFor<TProperty>(Expression<Func<T, TProperty>> expression) {
 			expression.Guard("Cannot pass null to RuleFor");
 			var ruleBuilder = new RuleBuilder<T, TProperty>(expression);
-			nestedValidators.Add(ruleBuilder);
+			_rules.Add(ruleBuilder);
 			return ruleBuilder;
 		}
 
@@ -82,7 +82,7 @@ namespace AdvancedValidator {
 		//}
 
 		//public IEnumerator<IValidationRule<T>> GetEnumerator() {
-		//	return nestedValidators.SelectMany(x => x).ToList().GetEnumerator();
+		//	return _rules.SelectMany(x => x).ToList().GetEnumerator();
 		//}
 
 		//IEnumerator IEnumerable.GetEnumerator() {

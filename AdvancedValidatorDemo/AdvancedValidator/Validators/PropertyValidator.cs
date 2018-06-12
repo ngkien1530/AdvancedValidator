@@ -26,8 +26,6 @@ namespace AdvancedValidator.Validators {
 	using Results;
 
 	public abstract class PropertyValidator : IPropertyValidator {
-		private readonly List<Func<object, object>> customFormatArgs = new List<Func<object, object>>();
-
 		private string _errorMessage;
 
 		protected PropertyValidator(string errorMessage)
@@ -58,9 +56,6 @@ namespace AdvancedValidator.Validators {
 			_errorMessage = errorMessage;
 		}
 
-		public ICollection<Func<object, object>> CustomMessageFormatArguments {
-			get { return customFormatArgs; }
-		}
 
 		public virtual IEnumerable<ValidationFailure> Validate(PropertyValidatorContext context) {
 			//context.MessageFormatter.AppendPropertyName(context.PropertyDescription);
@@ -87,7 +82,7 @@ namespace AdvancedValidator.Validators {
 
 			//string error = context.MessageFormatter.BuildMessage(ErrorMessageTemplate);
 
-			var failure = new ValidationFailure(context.PropertyName, _errorMessage, context.PropertyValue);
+			var failure = new ValidationFailure(context.PropertyName, _errorMessage);
 
 
 			return failure;

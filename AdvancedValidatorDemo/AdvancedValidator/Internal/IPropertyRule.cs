@@ -16,17 +16,21 @@
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
 #endregion
 
+using System.Collections.Generic;
+using AdvancedValidator.Results;
+
 namespace AdvancedValidator.Internal {
 	using System;
 	using System.Reflection;
 	using Validators;
 
-	public interface IPropertyRule<T> : IValidationRule<T> {
+	public interface IPropertyRule<T> /*: IValidationRule<T>*/ {
 		//string CustomPropertyName { get; set; }
 		//string PropertyName { get; set; }
 		//string PropertyDescription { get; }
 		//MemberInfo Member { get; }
 		//Action<T> OnFailure { get; set; }
 		IPropertyValidator Validator { get; set; }
-	}
+	    IEnumerable<ValidationFailure> Validate(T instance);
+    }
 }
