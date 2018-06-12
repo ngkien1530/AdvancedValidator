@@ -14,7 +14,6 @@ namespace AdvancedValidatorDemo.Controllers
         [HttpPost]
         public ActionResult Index(Student objStudent)
         {
-			
 			var validator = new StudentValidator();
 			var result = validator.Validate(objStudent);
 			if (result.IsValid)

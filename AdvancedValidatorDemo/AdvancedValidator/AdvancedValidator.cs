@@ -6,7 +6,7 @@ using AdvancedValidator.Rules;
 
 namespace AdvancedValidator
 {
-    public abstract class AbstractValidator<T> : IValidator<T>
+    public abstract class AdvancedValidator<T> : IValidator<T>
     {
         private readonly List<IPropertyRule<T>> _rules = new List<IPropertyRule<T>>();
 

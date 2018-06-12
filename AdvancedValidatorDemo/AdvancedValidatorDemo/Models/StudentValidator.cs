@@ -3,7 +3,7 @@ using AdvancedValidator.Validators;
 
 namespace AdvancedValidatorDemo.Models
 {
-    public class StudentValidator : AbstractValidator<Student>
+    public class StudentValidator : AdvancedValidator<Student>
     {
         public StudentValidator()
         {
