@@ -4,29 +4,28 @@ using System.Linq.Expressions;
 using AdvancedValidator.Results;
 using AdvancedValidator.Validators;
 
-namespace AdvancedValidator.Internal
+namespace AdvancedValidator.Rules
 {
-    public class ValidatorRuleHelper<T, TProperty>: IValidatorRuleHelper<T, TProperty>
+    public class PropertyRuleHelper<T, TProperty>: IPropertyRuleHelper<T, TProperty>
     {
-        private readonly List<IValidatorRule<T>> _rules = new List<IValidatorRule<T>>();
+        private readonly List<IPropertyRule<T>> _rules = new List<IPropertyRule<T>>();
         
-        public ValidatorRuleHelper(Expression<Func<T, TProperty>> expression)
+        public PropertyRuleHelper(Expression<Func<T, TProperty>> expression)
         {
-            Model = new PropertyModel<T, TProperty>(expression.GetMember(), expression.Compile(), expression);
+            Model = new PropertyModel<T, TProperty>(((MemberExpression)expression.Body).Member, expression.Compile(), expression);
         }
 
         public PropertyModel<T, TProperty> Model { get; }
 
-        public IValidatorRuleHelper<T, TProperty> SetValidator(IPropertyValidator validator)
+        public IPropertyRuleHelper<T, TProperty> SetValidator(IPropertyValidator validator)
         {
-            validator.Guard("Cannot pass a null validator to SetValidator.");
-            var rule = new ValidatorRule<T, TProperty>(Model, validator);
+            var rule = new PropertyRule<T, TProperty>(Model, validator);
             _rules.Add(rule);
             Validator = validator;
             return this;
         }
 
-        public IValidatorRuleHelper<T, TProperty> SetErrorMessage(string errorMessage)
+        public IPropertyRuleHelper<T, TProperty> SetErrorMessage(string errorMessage)
         {
             Validator.SetErrorMessage(errorMessage);
             return this;

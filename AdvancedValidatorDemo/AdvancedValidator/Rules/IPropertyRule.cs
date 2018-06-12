@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using AdvancedValidator.Results;
 using AdvancedValidator.Validators;
 
-namespace AdvancedValidator.Internal
+namespace AdvancedValidator.Rules
 {
-    public interface IValidatorRule<in T>
+    public interface IPropertyRule<in T>
     {
         IPropertyValidator Validator { get; set; }
 

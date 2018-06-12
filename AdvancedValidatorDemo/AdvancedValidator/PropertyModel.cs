@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace AdvancedValidator.Internal
+namespace AdvancedValidator
 {
     public class PropertyModel<T, TProperty>
     {

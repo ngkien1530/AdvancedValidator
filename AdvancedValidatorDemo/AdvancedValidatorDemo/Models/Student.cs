@@ -2,6 +2,7 @@
 
 namespace AdvancedValidatorDemo.Models
 {
+    //[AdvancedValidator.Attributes.Validator(typeof(StudentValidator))]
     public class Student
     {
         public int StudentID { get; set; }

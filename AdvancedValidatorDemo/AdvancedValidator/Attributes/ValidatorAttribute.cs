@@ -5,11 +5,11 @@ namespace AdvancedValidator.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public class ValidatorAttribute : Attribute
     {
-        public ValidatorAttribute(Type validatorType)
+        public ValidatorAttribute(IValidator validatorType)
         {
             ValidatorType = validatorType;
         }
 
-        public Type ValidatorType { get; }
+        public IValidator ValidatorType { get; }
     }
 }

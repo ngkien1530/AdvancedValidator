@@ -22,7 +22,7 @@ using AdvancedValidator.Results;
 
 namespace AdvancedValidator
 {
-    public interface IValidator<T> : IValidator /*, IEnumerable<IValidationRule<T>>*/
+    public interface IValidator<T> : IValidator
     {
         ValidatorResult Validate(T instance);
     }

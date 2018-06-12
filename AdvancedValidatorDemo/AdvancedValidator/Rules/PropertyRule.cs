@@ -3,13 +3,13 @@ using System.Reflection;
 using AdvancedValidator.Results;
 using AdvancedValidator.Validators;
 
-namespace AdvancedValidator.Internal
+namespace AdvancedValidator.Rules
 {
-    public class ValidatorRule<T, TProperty> : IValidatorRule<T>
+    public class PropertyRule<T, TProperty> : IPropertyRule<T>
     {
         private readonly PropertyModel<T, TProperty> _model;
 
-        public ValidatorRule(PropertyModel<T, TProperty> propertyModel, IPropertyValidator validator)
+        public PropertyRule(PropertyModel<T, TProperty> propertyModel, IPropertyValidator validator)
         {
             _model = propertyModel;
             Validator = validator;

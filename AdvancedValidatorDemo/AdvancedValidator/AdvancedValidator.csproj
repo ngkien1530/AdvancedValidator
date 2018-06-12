@@ -43,22 +43,22 @@
     <Compile Include="AbstractValidator.cs" />
     <Compile Include="Attributes\ValidatorAttribute.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Internal\Extensions.cs" />
-    <Compile Include="Internal\IValidatorRule.cs" />
-    <Compile Include="Internal\PropertyModel.cs" />
-    <Compile Include="Internal\ValidatorRule.cs" />
-    <Compile Include="Internal\ValidatorRuleHelper.cs" />
+    <Compile Include="Rules\IPropertyRule.cs" />
+    <Compile Include="PropertyModel.cs" />
+    <Compile Include="Rules\PropertyRule.cs" />
+    <Compile Include="Rules\PropertyRuleHelper.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="IValidatorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ValidatorError.cs" />
     <Compile Include="Results\ValidatorResult.cs" />
-    <Compile Include="Internal\IValidatorRuleHelper.cs" />
+    <Compile Include="Rules\IPropertyRuleHelper.cs" />
     <Compile Include="ValidatorFactoryBase.cs" />
     <Compile Include="Validators\IPropertyValidator.cs" />
     <Compile Include="Validators\NotEmptyValidator.cs" />
     <Compile Include="Validators\PropertyValidator.cs" />
     <Compile Include="Validators\PropertyValidatorContext.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
