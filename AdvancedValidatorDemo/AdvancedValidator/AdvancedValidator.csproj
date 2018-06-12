@@ -49,12 +49,10 @@
     <Compile Include="Rules\PropertyRule.cs" />
     <Compile Include="Rules\PropertyRuleHelper.cs" />
     <Compile Include="IValidator.cs" />
-    <Compile Include="IValidatorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ValidatorError.cs" />
     <Compile Include="Results\ValidatorResult.cs" />
     <Compile Include="Rules\IPropertyRuleHelper.cs" />
-    <Compile Include="ValidatorFactoryBase.cs" />
     <Compile Include="Validators\IPropertyValidator.cs" />
     <Compile Include="Validators\NotEmptyValidator.cs" />
     <Compile Include="Validators\PropertyValidator.cs" />

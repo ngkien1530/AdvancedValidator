@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using AdvancedValidator.Results;
 using AdvancedValidator.Validators;
@@ -35,12 +37,13 @@ namespace AdvancedValidator.Rules
 
         public virtual IEnumerable<ValidatorError> Validate(T instance)
         {
-            foreach (var rule in _rules)
-            {
-                var results = rule.Validate(instance);
+	        var results = new List<ValidatorError>();
+			foreach (var rule in _rules)
+			{
+				results.AddRange(rule.Validate(instance));
+			}
 
-                foreach (var result in results) yield return result;
-            }
-        }
+	        return results;
+		}
     }
 }

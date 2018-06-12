@@ -22,8 +22,8 @@ namespace AdvancedValidator
                 failures.AddRange(validator.Validate(instance));
             return new ValidatorResult(failures);
         }
-
-        public IPropertyRuleHelper<T, TProperty> AddRule<TProperty>(Expression<Func<T, TProperty>> expression)
+		
+		public IPropertyRuleHelper<T, TProperty> AddRule<TProperty>(Expression<Func<T, TProperty>> expression)
         {
             var ruleBuilder = new PropertyRuleHelper<T, TProperty>(expression);
             _rules.Add(ruleBuilder);

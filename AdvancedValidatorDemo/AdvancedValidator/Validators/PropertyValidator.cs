@@ -17,8 +17,7 @@ namespace AdvancedValidator.Validators
         {
             _errorMessage = errorMessage;
         }
-
-
+        
         public virtual IEnumerable<ValidatorError> Validate(PropertyValidatorContext context)
         {
             if (!IsValid(context)) return new[] {CreateValidationError(context)};

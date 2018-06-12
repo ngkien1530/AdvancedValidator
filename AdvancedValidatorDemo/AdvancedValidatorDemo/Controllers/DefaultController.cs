@@ -13,20 +13,17 @@ namespace AdvancedValidatorDemo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Student objStudent)
+        public ActionResult Index(Student student)
         {
 			var validator = new StudentValidator();
-			var result = validator.Validate(objStudent);
-			if (result.IsValid)
+			var result = validator.Validate(student);
+			if (!result.IsValid)
 			{
-			}
-			else
-			{
-				foreach (var failer in result.Errors)
-					ModelState.AddModelError(failer.PropertyName, failer.ErrorMessage);
+				foreach (var error in result.Errors)
+					ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 			}
 
-			return View(objStudent);
+			return View(student);
         }
     }
 }
