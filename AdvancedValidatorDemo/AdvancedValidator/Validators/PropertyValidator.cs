@@ -13,7 +13,7 @@ namespace AdvancedValidator.Validators
             _errorMessage = errorMessage;
         }
 
-        public void SetErrorMessage(string errorMessage)
+		public void SetErrorMessage(string errorMessage)
         {
             _errorMessage = errorMessage;
         }

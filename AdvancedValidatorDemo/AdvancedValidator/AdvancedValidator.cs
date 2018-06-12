@@ -23,16 +23,13 @@ namespace AdvancedValidator
             return new ValidatorResult(failures);
         }
 
-        //public void AddRule(IPropertyRule<T> rule)
-        //{
-        //    _rules.Add(rule);
-        //}
-
         public IPropertyRuleHelper<T, TProperty> AddRule<TProperty>(Expression<Func<T, TProperty>> expression)
         {
             var ruleBuilder = new PropertyRuleHelper<T, TProperty>(expression);
             _rules.Add(ruleBuilder);
             return ruleBuilder;
         }
+
+
     }
 }

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +59,7 @@
     <Compile Include="Validators\NotEmptyValidator.cs" />
     <Compile Include="Validators\PropertyValidator.cs" />
     <Compile Include="Validators\PropertyValidatorContext.cs" />
+    <Compile Include="Validators\RegularExpressionValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
