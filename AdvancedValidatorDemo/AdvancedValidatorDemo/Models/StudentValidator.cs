@@ -7,22 +7,22 @@ namespace AdvancedValidatorDemo.Models
     {
         public StudentValidator()
         {
-            RuleFor(x => x.StudentName)
+            AddRule(x => x.StudentName)
                 .SetValidator(new NotEmptyValidator())
                 .SetErrorMessage("Student Name is required");
-            //   RuleFor(x => x.StudentName).NotEmpty().WithMessage("Student Name 2 is required");
+            //   AddRule(x => x.StudentName).NotEmpty().WithMessage("Student Name 2 is required");
 
-            //         RuleFor(x => x.StudentDOB).NotEmpty().WithMessage("Student DOB is required");
+            //         AddRule(x => x.StudentDOB).NotEmpty().WithMessage("Student DOB is required");
 
-            //RuleFor(x => x.StudentEmailID).NotEmpty().WithMessage("Student EmailID is required");
+            //AddRule(x => x.StudentEmailID).NotEmpty().WithMessage("Student EmailID is required");
 
-            //RuleFor(x => x.StudentFees).NotEmpty().WithMessage("Student Fees is required");
+            //AddRule(x => x.StudentFees).NotEmpty().WithMessage("Student Fees is required");
 
-            //RuleFor(x => x.StudentAddress).NotEmpty().WithMessage("Student Address is required");
+            //AddRule(x => x.StudentAddress).NotEmpty().WithMessage("Student Address is required");
 
-            //RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
+            //AddRule(x => x.Password).NotEmpty().WithMessage("Password is required");
 
-            //RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Confirm Password is required");
+            //AddRule(x => x.ConfirmPassword).NotEmpty().WithMessage("Confirm Password is required");
         }
     }
 }
