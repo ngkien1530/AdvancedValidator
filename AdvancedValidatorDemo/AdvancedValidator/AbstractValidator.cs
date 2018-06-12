@@ -64,7 +64,7 @@ namespace AdvancedValidator {
 			_rules.Add(rule);
 		}
 
-		public IRuleBuilderInitial<T, TProperty> RuleFor<TProperty>(Expression<Func<T, TProperty>> expression) {
+		public IRuleBuilder<T, TProperty> RuleFor<TProperty>(Expression<Func<T, TProperty>> expression) {
 			expression.Guard("Cannot pass null to RuleFor");
 			var ruleBuilder = new RuleBuilder<T, TProperty>(expression);
 			_rules.Add(ruleBuilder);

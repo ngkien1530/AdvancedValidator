@@ -11,7 +11,9 @@ namespace AdvancedValidatorDemo.Models
 	{
 		public StudentValidator()
 		{
-			RuleFor(x => x.StudentName).SetValidator(new NotEmptyValidator()).WithMessage("Student Name is required");
+			RuleFor(x => x.StudentName)
+                .SetValidator(new NotEmptyValidator())
+                .SetErrorMessage("Student Name is required");
 		 //   RuleFor(x => x.StudentName).NotEmpty().WithMessage("Student Name 2 is required");
 
    //         RuleFor(x => x.StudentDOB).NotEmpty().WithMessage("Student DOB is required");

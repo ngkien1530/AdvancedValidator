@@ -30,8 +30,9 @@ namespace AdvancedValidator.Internal {
 	/// </summary>
 	/// <typeparam name="T">Type of object being validated</typeparam>
 	/// <typeparam name="TProperty">Type of property being validated</typeparam>
-	public class RuleBuilder<T, TProperty> : IRuleBuilderOptions<T, TProperty>, IPropertyRule<T>, IRuleBuilderInitial<T, TProperty> {
-		PropertyRule<T, TProperty> currentRule;
+	public class RuleBuilder<T, TProperty> : IRuleBuilder<T, TProperty> //IRuleBuilderOptions<T, TProperty>, IPropertyRule<T> , IRuleBuilderInitial<T, TProperty> {
+    { 
+        PropertyRule<T, TProperty> currentRule;
 		readonly PropertyModel<T, TProperty> model;
 		readonly List<IPropertyRule<T>> rules = new List<IPropertyRule<T>>();
 		//Func<CascadeMode> cascadeMode = () => ValidatorOptions.CascadeMode;
@@ -58,15 +59,22 @@ namespace AdvancedValidator.Internal {
 		/// </summary>
 		/// <param name="validator">The validator to set</param>
 		/// <returns></returns>
-		public IRuleBuilderOptions<T, TProperty> SetValidator(IPropertyValidator validator) {
+		public IRuleBuilder<T, TProperty> SetValidator(IPropertyValidator validator) {
 			validator.Guard("Cannot pass a null validator to SetValidator.");
 			var rule = new PropertyRule<T, TProperty>(model, validator);
 			rules.Add(rule);
 			currentRule = rule;
+		    Validator = validator;
 			return this;
 		}
 
-		/// <summary>
+	    public IRuleBuilder<T, TProperty> SetErrorMessage(string errorMessage)
+	    {
+            Validator.SetErrorMessage(errorMessage);
+	        return this;
+        }
+
+	    /// <summary>
 		/// Sets the validator associated with the rule. Use with complex properties where an IValidator instance is already declared for the property type.
 		/// </summary>
 		/// <param name="validator">The validator to set</param>
@@ -76,7 +84,7 @@ namespace AdvancedValidator.Internal {
 		//	return this;
 		//}
 
-		public IRuleBuilderOptions<T, TProperty> Configure(Action<IPropertyRule<T>> configurator) {
+		public IRuleBuilder<T, TProperty> Configure(Action<IPropertyRule<T>> configurator) {
 			configurator(currentRule);
 			return this;
 		}
@@ -93,7 +101,6 @@ namespace AdvancedValidator.Internal {
 
 	    public virtual IEnumerable<ValidationFailure> Validate(T instance) {
 			//var cascade = cascadeMode();
-			bool hasAnyFailure = false;
 
 			foreach(var rule in rules) {
 				var results = rule.Validate(instance);
@@ -112,7 +119,7 @@ namespace AdvancedValidator.Internal {
 			//}
 		}
 
-		public IRuleBuilderInitial<T, TProperty> Configure(Action<RuleBuilder<T, TProperty>> configurator) {
+		public IRuleBuilder<T, TProperty> Configure(Action<RuleBuilder<T, TProperty>> configurator) {
 			configurator(this);
 			return this;
 		}

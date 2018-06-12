@@ -36,21 +36,22 @@ namespace AdvancedValidator {
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TProperty"></typeparam>
-	public interface IRuleBuilder<T, TProperty> /*: IFluentInterface */{
-		/// <summary>
-		/// Associates a validator with this the property for this rule builder.
-		/// </summary>
-		/// <param name="validator">The validator to set</param>
-		/// <returns></returns>
-		IRuleBuilderOptions<T, TProperty> SetValidator(IPropertyValidator validator);
+	public interface IRuleBuilder<T, TProperty>: IPropertyRule<T>
+/*: IFluentInterface */{
+        /// <summary>
+        /// Associates a validator with this the property for this rule builder.
+        /// </summary>
+        /// <param name="validator">The validator to set</param>
+        /// <returns></returns>
+        IRuleBuilder<T, TProperty> SetValidator(IPropertyValidator validator);
+	    IRuleBuilder<T, TProperty> SetErrorMessage(string errorMessage);
 
-
-		/// <summary>
-		/// Associates an instance of IValidator with the current property rule.
-		/// </summary>
-		/// <param name="validator">The validator to use</param>
-		//IRuleBuilderOptions<T, TProperty> SetValidator(IValidator<TProperty> validator);
-	}
+        /// <summary>
+        /// Associates an instance of IValidator with the current property rule.
+        /// </summary>
+        /// <param name="validator">The validator to use</param>
+        //IRuleBuilderOptions<T, TProperty> SetValidator(IValidator<TProperty> validator);
+    }
 
 
 	/// <summary>
@@ -58,7 +59,7 @@ namespace AdvancedValidator {
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TProperty"></typeparam>
-	public interface IRuleBuilderOptions<T, TProperty> : /*IRuleBuilder<T, TProperty>,*/ IConfigurable<IPropertyRule<T>, IRuleBuilderOptions<T, TProperty>>
+	public interface IRuleBuilderOptions<T, TProperty> : IRuleBuilder<T, TProperty> /*IRuleBuilder<T, TProperty>,*/ //IConfigurable<IPropertyRule<T>, IRuleBuilderOptions<T, TProperty>>
 	{
 
 	}

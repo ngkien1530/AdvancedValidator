@@ -18,7 +18,7 @@ namespace AdvancedValidator.Internal {
 			Expression = expression;
 			//OnFailure = x => { };
 
-			PropertyName = ValidatorOptions.PropertyNameResolver(typeof(T), member);
+		    PropertyName = member.Name;
 		}
 
 		/// <summary>
