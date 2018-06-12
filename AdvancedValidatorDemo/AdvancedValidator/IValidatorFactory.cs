@@ -1,4 +1,5 @@
 #region License
+
 // Copyright 2008-2009 Jeremy Skinner (http://www.jeremyskinner.co.uk)
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,13 +15,16 @@
 // limitations under the License.
 // 
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
+
 #endregion
 
-namespace AdvancedValidator {
-	using System;
+using System;
 
-	public interface IValidatorFactory {
-		IValidator<T> GetValidator<T>();
-		IValidator GetValidator(Type type);
-	}
+namespace AdvancedValidator
+{
+    public interface IValidatorFactory
+    {
+        IValidator<T> GetValidator<T>();
+        IValidator GetValidator(Type type);
+    }
 }

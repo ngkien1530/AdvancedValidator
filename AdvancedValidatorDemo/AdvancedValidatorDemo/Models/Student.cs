@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace AdvancedValidatorDemo.Models
 {
@@ -22,6 +19,5 @@ namespace AdvancedValidatorDemo.Models
         public string Password { get; set; }
 
         public string ConfirmPassword { get; set; }
-
     }
 }

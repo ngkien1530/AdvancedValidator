@@ -1,4 +1,5 @@
 #region License
+
 // Copyright 2008-2009 Jeremy Skinner (http://www.jeremyskinner.co.uk)
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,29 +15,25 @@
 // limitations under the License.
 // 
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
+
 #endregion
 
-namespace AdvancedValidator.Results {
-	using System;
+using System.Collections.Generic;
+using System.Linq;
 
-#if !SILVERLIGHT
-	[Serializable]
-#endif
-	public class ValidationFailure {
+namespace AdvancedValidator.Results
+{
+    public class ValidatorResult
+    {
+        private readonly List<ValidatorError> _errors = new List<ValidatorError>();
 
-		public ValidationFailure(string propertyName, string error) {
-			PropertyName = propertyName;
-			ErrorMessage = error;
-			//AttemptedValue = attemptedValue;
-		}
+        public ValidatorResult(IEnumerable<ValidatorError> failures)
+        {
+            _errors.AddRange(failures.Where(failure => failure != null));
+        }
 
-		public string PropertyName { get; private set; }
-		public string ErrorMessage { get; private set; }
-		//public object AttemptedValue { get; private set; }
-		//public object CustomState { get; set; }
+        public bool IsValid => Errors.Count == 0;
 
-		public override string ToString() {
-			return ErrorMessage;
-		}
-	}
+        public IList<ValidatorError> Errors => _errors;
+    }
 }

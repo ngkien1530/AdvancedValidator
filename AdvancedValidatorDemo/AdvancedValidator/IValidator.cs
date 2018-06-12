@@ -1,4 +1,5 @@
 #region License
+
 // Copyright 2008-2009 Jeremy Skinner (http://www.jeremyskinner.co.uk)
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,48 +15,20 @@
 // limitations under the License.
 // 
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
+
 #endregion
 
-namespace AdvancedValidator {
-	using System.Collections.Generic;
-	using Internal;
-	using Results;
+using AdvancedValidator.Results;
 
-	public interface IValidator<T> : IValidator/*, IEnumerable<IValidationRule<T>>*/ {
-		/// <summary>
-		/// Validates the specified instance.
-		/// </summary>
-		/// <param name="instance">The instance to validate</param>
-		/// <returns>A ValidationResult object containing any validation failures.</returns>
-		ValidationResult Validate(T instance);
-		/// <summary>
-		/// Validates the specified instance.
-		/// </summary>
-		/// <param name="context">A ValidationContext</param>
-		/// <returns>A ValidationResult object containing any validation failures.</returns>
-		//ValidationResult Validate(ValidationContext<T> context);
-	}
+namespace AdvancedValidator
+{
+    public interface IValidator<T> : IValidator /*, IEnumerable<IValidationRule<T>>*/
+    {
+        ValidatorResult Validate(T instance);
+    }
 
-	public interface IValidator {
-		/// <summary>
-		/// Validates the specified instance
-		/// </summary>
-		/// <param name="instance"></param>
-		/// <returns>A ValidationResult containing any validation failures</returns>
-		ValidationResult Validate(object instance);
-
-
-		/// <summary>
-		/// Validates the specified instance.
-		/// </summary>
-		/// <param name="context">A ValidationContext</param>
-		/// <returns>A ValidationResult object containy any validation failures.</returns>
-		//ValidationResult Validate(ValidationContext context);
-
-		/// <summary>
-		/// Creates a hook to access various meta data properties
-		/// </summary>
-		/// <returns>A IValidatorDescriptor object which contains methods to access metadata</returns>
-		//IValidatorDescriptor CreateDescriptor();
-	}
+    public interface IValidator
+    {
+        ValidatorResult Validate(object instance);
+    }
 }

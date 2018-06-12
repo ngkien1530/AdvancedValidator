@@ -1,4 +1,5 @@
 #region License
+
 // Copyright 2008-2009 Jeremy Skinner (http://www.jeremyskinner.co.uk)
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,21 +15,26 @@
 // limitations under the License.
 // 
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
+
 #endregion
 
-namespace AdvancedValidator {
-	using System;
+using System;
 
-	public abstract class ValidatorFactoryBase : IValidatorFactory {
-		public IValidator<T> GetValidator<T>() {
-			return (IValidator<T>)GetValidator(typeof(T));
-		}
+namespace AdvancedValidator
+{
+    public abstract class ValidatorFactoryBase : IValidatorFactory
+    {
+        public IValidator<T> GetValidator<T>()
+        {
+            return (IValidator<T>) GetValidator(typeof(T));
+        }
 
-		public IValidator GetValidator(Type type) {
-			var genericType = typeof(IValidator<>).MakeGenericType(type);
-			return CreateInstance(genericType);
-		}
+        public IValidator GetValidator(Type type)
+        {
+            var genericType = typeof(IValidator<>).MakeGenericType(type);
+            return CreateInstance(genericType);
+        }
 
-		public abstract IValidator CreateInstance(Type validatorType);
-	}
+        public abstract IValidator CreateInstance(Type validatorType);
+    }
 }

@@ -1,4 +1,5 @@
 #region License
+
 // Copyright 2008-2009 Jeremy Skinner (http://www.jeremyskinner.co.uk)
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,24 +15,24 @@
 // limitations under the License.
 // 
 // The latest version of this file can be found at http://www.codeplex.com/FluentValidation
+
 #endregion
 
 //using AdvancedValidation.Resources;
 
-namespace AdvancedValidator.Validators {
-	using Attributes;
+namespace AdvancedValidator.Validators
+{
+    public class NotEmptyValidator : PropertyValidator
+    {
+        public NotEmptyValidator() : base(Constants.DefaultNotEmptyMessage)
+        {
+        }
 
-	public class NotEmptyValidator : PropertyValidator
-	{
-		public NotEmptyValidator() : base("Not Empty") {
-		}
+        protected override bool IsValid(PropertyValidatorContext context)
+        {
+            if (context.PropertyValue == null || context.PropertyValue.Equals(string.Empty)) return false;
 
-		protected override bool IsValid(PropertyValidatorContext context) {
-			if (context.PropertyValue == null || context.PropertyValue.Equals(string.Empty)) {
-				return false;
-			}
-
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }
