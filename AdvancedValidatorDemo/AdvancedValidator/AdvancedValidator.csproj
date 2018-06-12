@@ -45,12 +45,9 @@
     <Compile Include="CascadeMode.cs" />
     <Compile Include="DefaultValidatorExtensions.cs" />
     <Compile Include="DefaultValidatorOptions.cs" />
-    <Compile Include="Internal\DefaultValidatorSelector.cs" />
     <Compile Include="Internal\Extensions.cs" />
     <Compile Include="Internal\IConfigurable.cs" />
     <Compile Include="Internal\IPropertyRule.cs" />
-    <Compile Include="Internal\IValidationRuleCollection.cs" />
-    <Compile Include="Internal\IValidatorSelector.cs" />
     <Compile Include="Internal\PropertyChain.cs" />
     <Compile Include="Internal\PropertyModel.cs" />
     <Compile Include="Internal\PropertyRule.cs" />

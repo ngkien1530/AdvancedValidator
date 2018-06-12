@@ -30,38 +30,39 @@ namespace AdvancedValidator {
 	/// Base class for entity validator classes.
 	/// </summary>
 	/// <typeparam name="T">The type of the object being validated</typeparam>
-	public abstract class AbstractValidator<T> : IValidator<T>, IEnumerable<IValidationRule<T>>
+	public abstract class AbstractValidator<T> : IValidator<T>//, IEnumerable<IValidationRule<T>>
 	{
-		readonly List<IValidationRuleCollection<T>> nestedValidators = new List<IValidationRuleCollection<T>>();
+		readonly List<IValidationRule<T>> nestedValidators = new List<IValidationRule<T>>();
 
 		ValidationResult IValidator.Validate(object instance) {
 			return Validate((T)instance);
 		}
 
 		ValidationResult IValidator.Validate(ValidationContext context) {
-			var genericContext = new ValidationContext<T>((T)context.InstanceToValidate, context.PropertyChain, context.Selector);
+			var genericContext = new ValidationContext<T>((T)context.InstanceToValidate, context.PropertyChain);
 
 			return Validate(genericContext);
 		}
 
 		public virtual ValidationResult Validate(T instance) {
-			return Validate(new ValidationContext<T>(instance, new PropertyChain(), new DefaultValidatorSelector()));
+			return Validate(new ValidationContext<T>(instance, new PropertyChain()));
 		}
 		
 
-		public virtual ValidationResult Validate(ValidationContext<T> context) {
-			context.Guard("Cannot pass null to Validate");
-			var failures = nestedValidators.SelectMany(x => x.Validate(context)).ToList();
+		public virtual ValidationResult Validate(ValidationContext<T> context)
+		{
+		    context.Guard("Cannot pass null to Validate");
+		    var failures = new List<ValidationFailure>();
+		    foreach (var validator in nestedValidators)
+		    {
+		        failures.AddRange(validator.Validate(context));
+		    }
 			return new ValidationResult(failures);
 		}
 
 		public void AddRule(IValidationRule<T> rule) {
 			nestedValidators.Add(new SimpleRuleBuilder<T>(rule));
 		}
-
-		//public virtual IValidatorDescriptor CreateDescriptor() {
-		//	return new ValidatorDescriptor<T>(nestedValidators.SelectMany(x => x).ToList());
-		//}
 
 		public IRuleBuilderInitial<T, TProperty> RuleFor<TProperty>(Expression<Func<T, TProperty>> expression) {
 			expression.Guard("Cannot pass null to RuleFor");
@@ -80,12 +81,12 @@ namespace AdvancedValidator {
 		//	AddRule(new DelegateValidator<T>((x, ctx) => new[] { customValidator(x, ctx) }));
 		//}
 
-		public IEnumerator<IValidationRule<T>> GetEnumerator() {
-			return nestedValidators.SelectMany(x => x).ToList().GetEnumerator();
-		}
+		//public IEnumerator<IValidationRule<T>> GetEnumerator() {
+		//	return nestedValidators.SelectMany(x => x).ToList().GetEnumerator();
+		//}
 
-		IEnumerator IEnumerable.GetEnumerator() {
-			return GetEnumerator();
-		}
+		//IEnumerator IEnumerable.GetEnumerator() {
+		//	return GetEnumerator();
+		//}
 	}
 }

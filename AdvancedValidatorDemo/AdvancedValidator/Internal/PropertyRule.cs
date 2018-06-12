@@ -54,10 +54,6 @@ namespace AdvancedValidator.Internal {
 			set { model.PropertyName = value; }
 		}
 
-		public string PropertyDescription {
-			get { return model.PropertyDescription; }
-		}
-
 		public MemberInfo Member {
 			get { return model.Member; }
 		}
@@ -75,13 +71,10 @@ namespace AdvancedValidator.Internal {
 
 			string propertyName = BuildPropertyName(context);
 
-			if (context.Selector.CanExecute(this, propertyName)) {
-				var validationContext = new PropertyValidatorContext(model.PropertyDescription, context.InstanceToValidate, x => model.PropertyFunc((T)x), propertyName, Member);
-				validationContext.PropertyChain = context.PropertyChain;
-				return Validator.Validate(validationContext);
-			}
-
-			return Enumerable.Empty<ValidationFailure>();
+		    var validationContext = new PropertyValidatorContext(model.PropertyDescription, context.InstanceToValidate, x => model.PropertyFunc((T)x), propertyName, Member);
+		    validationContext.PropertyChain = context.PropertyChain;
+		    return Validator.Validate(validationContext);
+		    
 		}
 
 		private string BuildPropertyName(ValidationContext<T> context) {

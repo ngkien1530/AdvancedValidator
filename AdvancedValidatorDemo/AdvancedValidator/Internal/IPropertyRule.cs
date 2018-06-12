@@ -22,11 +22,11 @@ namespace AdvancedValidator.Internal {
 	using Validators;
 
 	public interface IPropertyRule<T> : IValidationRule<T> {
-		string CustomPropertyName { get; set; }
-		string PropertyName { get; set; }
-		string PropertyDescription { get; }
-		MemberInfo Member { get; }
-		Action<T> OnFailure { get; set; }
+		//string CustomPropertyName { get; set; }
+		//string PropertyName { get; set; }
+		//string PropertyDescription { get; }
+		//MemberInfo Member { get; }
+		//Action<T> OnFailure { get; set; }
 		IPropertyValidator Validator { get; set; }
 	}
 }

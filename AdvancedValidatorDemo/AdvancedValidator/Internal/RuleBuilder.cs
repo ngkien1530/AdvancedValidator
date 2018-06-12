@@ -30,7 +30,7 @@ namespace AdvancedValidator.Internal {
 	/// </summary>
 	/// <typeparam name="T">Type of object being validated</typeparam>
 	/// <typeparam name="TProperty">Type of property being validated</typeparam>
-	public class RuleBuilder<T, TProperty> : IRuleBuilderOptions<T, TProperty>, IValidationRuleCollection<T>, IRuleBuilderInitial<T, TProperty> {
+	public class RuleBuilder<T, TProperty> : IRuleBuilderOptions<T, TProperty>, IValidationRule<T>, IRuleBuilderInitial<T, TProperty> {
 		PropertyRule<T, TProperty> currentRule;
 		readonly PropertyModel<T, TProperty> model;
 		readonly List<IValidationRule<T>> rules = new List<IValidationRule<T>>();
@@ -81,13 +81,13 @@ namespace AdvancedValidator.Internal {
 			return this;
 		}
 
-		public IEnumerator<IValidationRule<T>> GetEnumerator() {
-			return rules.GetEnumerator();
-		}
+		//public IEnumerator<IValidationRule<T>> GetEnumerator() {
+		//	return rules.GetEnumerator();
+		//}
 
-		IEnumerator IEnumerable.GetEnumerator() {
-			return GetEnumerator();
-		}
+		//IEnumerator IEnumerable.GetEnumerator() {
+		//	return GetEnumerator();
+		//}
 
 		public virtual IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
 			//var cascade = cascadeMode();

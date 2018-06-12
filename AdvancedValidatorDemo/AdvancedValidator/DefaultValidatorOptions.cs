@@ -25,38 +25,44 @@ namespace AdvancedValidator {
 
 	public static class DefaultValidatorOptions
 	{
-		public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule, string errorMessage)
+		public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>
+            (this IRuleBuilderOptions<T, TProperty> rule, string errorMessage)
 		{
-			return rule.WithMessage(errorMessage, null as object[]);
+		    return rule.Configure(config => {
+		        config.Validator.SetErrorMessage(errorMessage);
+		        //funcs
+		        //.Select(func => new Func<object, object>(x => func((T)x)));
+		        //.ForEach(config.Validator.CustomMessageFormatArguments.Add);
+		    });
 		}
 
-		public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule, string errorMessage, params object[] formatArgs)
-		{
-			var funcs = ConvertArrayOfObjectsToArrayOfDelegates<T>(formatArgs);
-			return rule.WithMessage(errorMessage, funcs);
-		}
+		//public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule, string errorMessage, params object[] formatArgs)
+		//{
+		//	var funcs = ConvertArrayOfObjectsToArrayOfDelegates<T>(formatArgs);
+		//	return rule.WithMessage(errorMessage, funcs);
+		//}
 
-		public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule, string errorMessage, params Func<T, object>[] funcs)
-		{
-			errorMessage.Guard("A message must be specified when calling WithMessage.");
+		//public static IRuleBuilderOptions<T, TProperty> WithMessage<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule, string errorMessage, params Func<T, object>[] funcs)
+		//{
+		//	errorMessage.Guard("A message must be specified when calling WithMessage.");
 
 			
-			return rule.Configure(config => {
-				config.Validator.SetErrorMessage(errorMessage);
+		//	return rule.Configure(config => {
+		//		config.Validator.SetErrorMessage(errorMessage);
 
-				//funcs
-					//.Select(func => new Func<object, object>(x => func((T)x)));
-					//.ForEach(config.Validator.CustomMessageFormatArguments.Add);
-			});
-		}
+		//		//funcs
+		//			//.Select(func => new Func<object, object>(x => func((T)x)));
+		//			//.ForEach(config.Validator.CustomMessageFormatArguments.Add);
+		//	});
+		//}
 
-		static Func<T, object>[] ConvertArrayOfObjectsToArrayOfDelegates<T>(object[] objects)
-		{
-			if (objects == null || objects.Length == 0)
-			{
-				return new Func<T, object>[0];
-			}
-			return objects.Select(obj => new Func<T, object>(x => obj)).ToArray();
-		}
+		//static Func<T, object>[] ConvertArrayOfObjectsToArrayOfDelegates<T>(object[] objects)
+		//{
+		//	if (objects == null || objects.Length == 0)
+		//	{
+		//		return new Func<T, object>[0];
+		//	}
+		//	return objects.Select(obj => new Func<T, object>(x => obj)).ToArray();
+		//}
 	}
 }

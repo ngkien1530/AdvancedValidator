@@ -21,7 +21,7 @@ namespace AdvancedValidator {
 	using Internal;
 	using Results;
 
-	public interface IValidator<T> : IValidator, IEnumerable<IValidationRule<T>> {
+	public interface IValidator<T> : IValidator/*, IEnumerable<IValidationRule<T>>*/ {
 		/// <summary>
 		/// Validates the specified instance.
 		/// </summary>

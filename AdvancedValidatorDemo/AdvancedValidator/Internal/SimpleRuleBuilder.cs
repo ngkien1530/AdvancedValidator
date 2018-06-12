@@ -25,21 +25,21 @@ namespace AdvancedValidator.Internal {
 	/// <summary>
 	/// A simple implementation of IRuleBuilder that just holds a single validation rule.
 	/// </summary>
-	public class SimpleRuleBuilder<T> : IValidationRuleCollection<T> {
-
-		readonly IValidationRule<T> rule;
+	public class SimpleRuleBuilder<T> : IValidationRule<T>
+	{
+        readonly IValidationRule<T> rule;
 
 		public SimpleRuleBuilder(IValidationRule<T> rule) {
 			this.rule = rule;
 		}
 
-		public IEnumerator<IValidationRule<T>> GetEnumerator() {
-			return new List<IValidationRule<T>> {rule}.GetEnumerator();
-		}
+		//public IEnumerator<IValidationRule<T>> GetEnumerator() {
+		//	return new List<IValidationRule<T>> {rule}.GetEnumerator();
+		//}
 
-		IEnumerator IEnumerable.GetEnumerator() {
-			return GetEnumerator();
-		}
+		//IEnumerator IEnumerable.GetEnumerator() {
+		//	return GetEnumerator();
+		//}
 
 		public IEnumerable<ValidationFailure> Validate(ValidationContext<T> context) {
 			return rule.Validate(context);
