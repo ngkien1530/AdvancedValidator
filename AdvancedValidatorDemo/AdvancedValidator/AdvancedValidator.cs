@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using AdvancedValidator.Results;
@@ -25,11 +25,10 @@ namespace AdvancedValidator
 		
 		public IPropertyRuleHelper<T, TProperty> AddRule<TProperty>(Expression<Func<T, TProperty>> expression)
         {
-            var ruleBuilder = new PropertyRuleHelper<T, TProperty>(expression);
-            _rules.Add(ruleBuilder);
-            return ruleBuilder;
+            //Mẫu Stragegy -> _rule là IPropertyRule, rule là PropertyRuleHelper: IPropertyRule
+            var rule = new PropertyRuleHelper<T, TProperty>(expression);
+            _rules.Add(rule);
+            return rule;
         }
-
-
     }
 }

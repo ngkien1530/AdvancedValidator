@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +37,24 @@ namespace AdvancedValidator.Rules
 
         public virtual IEnumerable<ValidatorError> Validate(T instance)
         {
-	        var results = new List<ValidatorError>();
-			foreach (var rule in _rules)
-			{
-				results.AddRange(rule.Validate(instance));
-			}
+            var results = new List<ValidatorError>();
+            foreach (var rule in _rules)
+            {
+                results.AddRange(rule.Validate(instance));
+            }
 
-	        return results;
-		}
+            return results;
+        }
+
+        //public virtual IEnumerable<ValidatorError> Validate(T instance)
+        //{
+        //    foreach (var rule in _rules)
+        //    {
+        //        var results = rule.Validate(instance);
+
+        //        foreach (var result in results)
+        //            yield return result;
+        //    }
+        //}
     }
 }

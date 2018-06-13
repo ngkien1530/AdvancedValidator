@@ -10,12 +10,14 @@ namespace AdvancedValidatorDemo.Models
         {
 	        AddRule(x => x.StudentName)
 				.SetValidator(new NotEmptyValidator())
-				.SetValidator(new CharOnlyValidator());
+	            .SetValidator(new LengthValidator(0, 15)).SetErrorMessage("Length should be 1-14")
+                .SetValidator(new CharOnlyValidator()).SetErrorMessage("Only char");
 
-	        AddRule(x => x.StudentDOB)
-		        .SetValidator(new NotEmptyValidator());
+            AddRule(x => x.StudentDOB)
+                .SetValidator(new NotEmptyValidator())
+                .SetValidator(new RegularExpressionValidator("^[0-9]{1,12}$"));
 
-	        AddRule(x => x.StudentEmail)
+            AddRule(x => x.StudentEmail)
 		        .SetValidator(new NotEmptyValidator());
 
 	        AddRule(x => x.StudentFees)
@@ -24,10 +26,8 @@ namespace AdvancedValidatorDemo.Models
 	        AddRule(x => x.StudentAddress)
 		        .SetValidator(new NotEmptyValidator());
 
-			AddRule(x => x.Password)
-				.SetValidator(new NotEmptyValidator())
-				.SetValidator(new RegularExpressionValidator("^[0-9]{1,12}$"))
-					.SetErrorMessage("Regular Expression is not valid, only contain ^[0-9]{1,12}$");
+            AddRule(x => x.Password)
+                .SetValidator(new NotEmptyValidator());
 
 	        AddRule(x => x.ConfirmPassword)
 		        .SetValidator(new NotEmptyValidator());

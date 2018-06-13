@@ -54,6 +54,7 @@
     <Compile Include="Results\ValidatorResult.cs" />
     <Compile Include="Rules\IPropertyRuleHelper.cs" />
     <Compile Include="Validators\IPropertyValidator.cs" />
+    <Compile Include="Validators\LengthValidator.cs" />
     <Compile Include="Validators\NotEmptyValidator.cs" />
     <Compile Include="Validators\PropertyValidator.cs" />
     <Compile Include="Validators\PropertyValidatorContext.cs" />

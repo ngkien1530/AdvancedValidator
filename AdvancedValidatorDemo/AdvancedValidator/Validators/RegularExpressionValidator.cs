@@ -31,7 +31,8 @@ namespace AdvancedValidator.Validators
 		{
 		    var regex = _regexFunc(context.Instance);
 
-		    if (regex != null && context.PropertyValue != null && !regex.IsMatch((string)context.PropertyValue))
+		    if (regex != null && context.PropertyValue != null 
+                && !regex.IsMatch((string)context.PropertyValue))
 		    {
 		        return false;
 		    }

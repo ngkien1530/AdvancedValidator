@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using AdvancedValidator.Results;
 using AdvancedValidator.Validators;
@@ -7,6 +7,7 @@ namespace AdvancedValidator.Rules
 {
     public class PropertyRule<T, TProperty> : IPropertyRule<T>
     {
+        //Mẫu composit: chứa đệ quy con chồng chồng
         private readonly PropertyModel<T, TProperty> _model;
 
         public PropertyRule(PropertyModel<T, TProperty> propertyModel, IPropertyValidator validator)

@@ -28,7 +28,6 @@ namespace AdvancedValidator.Validators
         public object Instance { get; }
         public string PropertyName { get; }
 
-        //Lazy loading
         public object PropertyValue
         {
             get

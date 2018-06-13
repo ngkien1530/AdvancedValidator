@@ -17,7 +17,10 @@ namespace AdvancedValidator.Validators
         {
             _errorMessage = errorMessage;
         }
-        
+
+        //Template method: 
+        protected abstract bool IsValid(PropertyValidatorContext context);
+
         public virtual IEnumerable<ValidatorError> Validate(PropertyValidatorContext context)
         {
             if (!IsValid(context)) return new[] {CreateValidationError(context)};
@@ -25,7 +28,6 @@ namespace AdvancedValidator.Validators
             return Enumerable.Empty<ValidatorError>();
         }
 
-        protected abstract bool IsValid(PropertyValidatorContext context);
 
         protected virtual ValidatorError CreateValidationError(PropertyValidatorContext context)
         {
